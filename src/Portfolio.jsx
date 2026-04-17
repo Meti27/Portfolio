@@ -84,8 +84,6 @@ export default function Portfolio() {
   const [active, setActive] = useState("Home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -110,11 +108,6 @@ export default function Portfolio() {
   const scrollTo = (id) => {
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSent(true);
   };
 
   return (
@@ -248,7 +241,6 @@ export default function Portfolio() {
             </h2>
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-16 items-start">
-            {/* Left: bio + stack + stats */}
             <div>
               <FadeIn delay={0.1}>
                 <p className="text-lg leading-relaxed mb-6" style={{ color: "#374151" }}>
@@ -290,7 +282,6 @@ export default function Portfolio() {
               </FadeIn>
             </div>
 
-            {/* Right: interest cards */}
             <FadeIn delay={0.2}>
               <div className="space-y-4">
                 {[
@@ -383,7 +374,7 @@ export default function Portfolio() {
               <div className="space-y-8">
                 {[
                   { icon: "📧", label: "Email", value: "metiseni27@gmail.com", link: "mailto:metiseni27@gmail.com" },
-                  { icon: "📞", label: "Phone", value: "+389 70 810 878", link: "tel:+38970810878" },
+                  // { icon: "📞", label: "Phone", value: "+389 70 810 878", link: "tel:+38970810878" },
                   { icon: "📍", label: "Location", value: "Gostivar, North Macedonia", link: null },
                   { icon: "💼", label: "LinkedIn", value: "muhamed-iseni", link: "https://www.linkedin.com/in/muhamed-iseni-9b7a47253/" },
                   { icon: "🐙", label: "GitHub", value: "github.com/Meti27", link: "https://github.com/Meti27" },
@@ -414,59 +405,28 @@ export default function Portfolio() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              {sent ? (
-                <div
-                  className="rounded-2xl p-12 flex flex-col items-center justify-center text-center"
-                  style={{ background: "#EFF6FF", border: "2px solid #BFDBFE", minHeight: "360px" }}
-                >
-                  <div className="text-5xl mb-4">🎉</div>
-                  <h3 className="text-2xl font-black mb-2" style={{ color: "#0a1940" }}>Message sent!</h3>
-                  <p style={{ color: "#6B7280" }}>Thanks for reaching out. I'll get back to you as soon as possible.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {[
-                    { name: "name", label: "Your Name", type: "text", placeholder: "John Doe" },
-                    { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com" },
-                  ].map(({ name, label, type, placeholder }) => (
-                    <div key={name}>
-                      <label className="block text-xs font-black uppercase mb-2" style={{ color: "#6B7280", letterSpacing: "0.15em" }}>{label}</label>
-                      <input
-                        type={type}
-                        required
-                        placeholder={placeholder}
-                        value={formData[name]}
-                        onChange={(e) => setFormData({ ...formData, [name]: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                        style={{ background: "#F9FAFB", border: "2px solid #E5E7EB", color: "#0a1940", fontFamily: "inherit" }}
-                        onFocus={(e) => (e.target.style.borderColor = "#60A5FA")}
-                        onBlur={(e) => (e.target.style.borderColor = "#E5E7EB")}
-                      />
-                    </div>
-                  ))}
-                  <div>
-                    <label className="block text-xs font-black uppercase mb-2" style={{ color: "#6B7280", letterSpacing: "0.15em" }}>Message</label>
-                    <textarea
-                      required
-                      rows={5}
-                      placeholder="Tell me about your project or idea..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                      style={{ background: "#F9FAFB", border: "2px solid #E5E7EB", color: "#0a1940", fontFamily: "inherit" }}
-                      onFocus={(e) => (e.target.style.borderColor = "#60A5FA")}
-                      onBlur={(e) => (e.target.style.borderColor = "#E5E7EB")}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full py-4 rounded-xl font-black text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              <div
+                className="rounded-2xl p-12 flex flex-col justify-center"
+                style={{ background: "#EFF6FF", border: "2px solid #BFDBFE", minHeight: "360px" }}
+              >
+                <div className="text-5xl mb-6">📬</div>
+                <h3 className="text-2xl font-black mb-4" style={{ color: "#0a1940" }}>
+                  Reach me directly
+                </h3>
+                <p className="mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+                  Feel free to contact me directly through email, LinkedIn, or GitHub. I'm open to freelance work, collaborations, and interesting project ideas.
+                </p>
+                <div className="space-y-4">
+                  <a
+                    href="mailto:metiseni27@gmail.com"
+                    className="block w-full py-4 rounded-xl font-black text-sm text-center transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                     style={{ background: "#0a1940", color: "#60A5FA", letterSpacing: "0.08em" }}
                   >
-                    Send Message →
-                  </button>
-                </form>
-              )}
+                    Email Me →
+                  </a>
+                 
+                </div>
+              </div>
             </FadeIn>
           </div>
         </div>
